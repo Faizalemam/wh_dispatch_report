@@ -1,0 +1,54 @@
+<odoo>
+    <record id="view_dispatch_report_tree" model="ir.ui.view">
+        <field name="name">warehouse.dispatch.report.tree</field>
+        <field name="model">warehouse.dispatch.report</field>
+        <field name="arch" type="xml">
+            <tree string="Warehouse Dispatch" create="false" edit="false" delete="false">
+                <field name="date_done" widget="datetime"/>
+                <field name="branch_name"/>
+                <field name="sro_number"/>
+                <field name="product_name"/>
+                <field name="unit" string="UoM"/>
+                <field name="qty" sum="Total Quantity"/>
+                <field name="cost" string="Unit Cost"/>
+                <field name="total_cost" sum="Grand Total Cost"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_dispatch_report_pivot" model="ir.ui.view">
+        <field name="name">warehouse.dispatch.report.pivot</field>
+        <field name="model">warehouse.dispatch.report</field>
+        <field name="arch" type="xml">
+            <pivot string="Warehouse Dispatch Pivot" display_quantity="true">
+                <field name="product_name" type="row"/>
+                <field name="unit" type="row"/>
+                <field name="qty" type="measure"/>
+                <field name="total_cost" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_dispatch_report_search" model="ir.ui.view">
+        <field name="model">warehouse.dispatch.report</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="product_name"/>
+                <field name="sro_number"/>
+                <group expand="1" string="Group By">
+                    <filter string="Branch Name" name="group_by_branch" context="{'group_by':'branch_name'}"/>
+                    <filter string="Product" name="group_by_product" context="{'group_by':'product_name'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_warehouse_dispatch_report" model="ir.actions.act_window">
+        <field name="name">Daily Warehouse Dispatch</field>
+        <field name="res_model">warehouse.dispatch.report</field>
+        <field name="view_mode">tree,pivot</field>
+    </record>
+
+    <menuitem id="menu_warehouse_dispatch_report" name="Warehouse Out Report" 
+              parent="stock.menu_warehouse_report" action="action_warehouse_dispatch_report" sequence="20"/>
+</odoo>
