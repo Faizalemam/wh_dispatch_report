@@ -2,15 +2,16 @@
     'name': 'Warehouse Daily Dispatch Report',
     'version': '16.0.1.0.0', 
     'category': 'Inventory/Reporting',
-    'summary': 'Validated SRO product delivery report with Branch and Date for Blue Sky Coffee',
+    'summary': 'Secure SRO product delivery report for Blue Sky Coffee',
     'description': """
 Warehouse Daily Dispatch Report
 ===============================
-This module provides a comprehensive reporting tool for warehouse dispatches.
+Developed by Faizal Emam (itdelhi.in).
+This module is proprietary software. All rights reserved.
 - Track SRO (Stock Return/Order) deliveries.
 - Branch-wise reporting.
-- Product cost and total valuation for Finance.
-- Pivot and Tree views for daily analysis.
+- Advanced costing logic (ir_property + product_template).
+- Financial auditing via Pivot and Tree views.
     """,
     'author': 'Faizal Emam',
     'website': 'https://itdelhi.in', 
@@ -24,5 +25,7 @@ This module provides a comprehensive reporting tool for warehouse dispatches.
     'installable': True,
     'auto_install': False,
     'application': True, 
-    'license': 'LGPL-3',
+    'license': 'OPL-1',  # Proprietary license to prevent unauthorized copying
+    'price': 49.00,      # Optional: Currency in EUR agar aap ise Odoo Apps store par bechna chahen
+    'currency': 'EUR',
 }
