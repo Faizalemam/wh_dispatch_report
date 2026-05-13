@@ -3,7 +3,7 @@
         <field name="name">warehouse.dispatch.report.tree</field>
         <field name="model">warehouse.dispatch.report</field>
         <field name="arch" type="xml">
-            <tree string="Warehouse Dispatch" create="false" edit="false" delete="false">
+            <tree string="Warehouse Dispatch" create="false" edit="false" delete="false" default_order="date_done desc">
                 <field name="date_done" widget="datetime"/>
                 <field name="branch_name"/>
                 <field name="sro_number"/>
@@ -21,8 +21,8 @@
         <field name="model">warehouse.dispatch.report</field>
         <field name="arch" type="xml">
             <pivot string="Warehouse Dispatch Pivot" display_quantity="true">
+                <field name="date_done" interval="day" type="col"/>
                 <field name="product_name" type="row"/>
-                <field name="unit" type="row"/>
                 <field name="qty" type="measure"/>
                 <field name="total_cost" type="measure"/>
             </pivot>
@@ -35,7 +35,14 @@
             <search>
                 <field name="product_name"/>
                 <field name="sro_number"/>
+                
+                <filter string="Year 2026" name="filter_year_2026" 
+                        domain="[('date_done', '&gt;=', '2026-01-01 00:00:00'), ('date_done', '&lt;=', '2026-12-31 23:59:59')]"/>
+                
+                <separator/>
+                
                 <group expand="1" string="Group By">
+                    <filter string="Date (Day)" name="group_by_date" context="{'group_by':'date_done:day'}"/>
                     <filter string="Branch Name" name="group_by_branch" context="{'group_by':'branch_name'}"/>
                     <filter string="Product" name="group_by_product" context="{'group_by':'product_name'}"/>
                 </group>
@@ -47,6 +54,10 @@
         <field name="name">Daily Warehouse Dispatch</field>
         <field name="res_model">warehouse.dispatch.report</field>
         <field name="view_mode">tree,pivot</field>
+        <field name="context">{
+            'search_default_filter_year_2026': 1,
+            'search_default_group_by_date': 1
+        }</field>
     </record>
 
     <menuitem id="menu_warehouse_dispatch_report" name="Warehouse Out Report" 
