@@ -25,7 +25,7 @@ This module is proprietary software. All rights reserved.
     'installable': True,
     'auto_install': False,
     'application': True, 
-    'license': 'OPL-1',  # Proprietary license to prevent unauthorized copying
-    'price': 49.00,      # Optional: Currency in EUR agar aap ise Odoo Apps store par bechna chahen
+    'license': 'OPL-1',  
+    'price': 49.00,      
     'currency': 'EUR',
 }
